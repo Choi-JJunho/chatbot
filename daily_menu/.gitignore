@@ -1,0 +1,11 @@
+# IntelliJ
+.idea/
+/*.classpath
+/.classpath
+/.springBeans
+*.iml
+/build
+target/
+out/
+classes/*
+lib/*
