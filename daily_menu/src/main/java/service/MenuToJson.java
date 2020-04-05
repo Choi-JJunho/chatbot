@@ -1,9 +1,11 @@
 package service;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public interface MenuToJson {
-    String getBreakfast();
-    Map<String, Object> getLunch();
-    String getDinner();
+    HashMap<String, Object> getBreakfast();
+    HashMap<String, Object> getLunch();
+    HashMap<String, Object> getDinner();
+    HashMap<String, Object> incorrect();
+
 }

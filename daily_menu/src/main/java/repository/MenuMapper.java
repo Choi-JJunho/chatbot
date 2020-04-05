@@ -1,20 +1,17 @@
 package repository;
 
-import dto.MenuDTO;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.HashMap;
 
 @Repository()
 public interface MenuMapper {
     @Select(value = "SELECT * FROM breakfast")
-    List<MenuDTO> getBreakfast();
-
+    HashMap<String, Object> getBreakfast();
     @Select(value = "SELECT * FROM lunch")
-    List<MenuDTO> getLunch();
-
+    HashMap<String, Object> getLunch();
     @Select(value = "SELECT * FROM dinner")
-    List<MenuDTO> getDinner();
+    HashMap<String, Object> getDinner();
 
 }
