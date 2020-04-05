@@ -38,7 +38,7 @@ print(lunch)
 print(dinner)
 
 
-conn = pymysql.connect(host='localhost', user='admin', password='', db='dailymenu', charset='utf8')
+conn = pymysql.connect(host='localhost', user='root', password='12345', db='daily_menu', charset='utf8')
 try:
     with conn.cursor() as curs:
         curs.execute('TRUNCATE TABLE breakfast;')
