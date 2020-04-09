@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.IncorrectService;
 import service.MenuToJson;
 
 import java.util.HashMap;
@@ -14,6 +15,9 @@ public class MenuController {
 
     @Autowired
     MenuToJson menuToJson;
+
+    @Autowired
+    IncorrectService incorrect;
 
     @RequestMapping("/getmenu")
     @ResponseBody
@@ -25,6 +29,6 @@ public class MenuController {
         else if(map.contains("저녁"))
             return menuToJson.getDinner();
         else
-            return menuToJson.incorrect();
+            return incorrect.printMessage();
     }
 }

@@ -99,9 +99,4 @@ public class MenuToJsonImpl implements MenuToJson {
         return result;
     }
 
-    public HashMap<String, Object> incorrect() throws NullPointerException {
-        return simpleText.simpleText("다음과 같은 명령어가 있습니다.\n" +
-                "['아침', '점심', '저녁']");
-    }
-
 }
