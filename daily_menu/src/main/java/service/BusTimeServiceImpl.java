@@ -34,7 +34,12 @@ public class BusTimeServiceImpl implements BusTimeService {
                 case 2:
                     if(cur > bus) {
                         bus += 60;
-                        --min;
+                        if(min == 0) {
+                            --hour;
+                            min+=59;
+                        }
+                        else
+                            --min;
                     }
                     sec = bus - cur;
                     break;
