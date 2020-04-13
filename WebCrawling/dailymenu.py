@@ -14,8 +14,8 @@ menuList = []
 
 for menulist in bs.find_all("td", {"class":name}):
      before = menulist.text
-     after = re.sub('\t', '', before)
-     if(after=="\r\n\xa0\r\n"):
+     after = re.sub('[\t\r]', '', before)
+     if(after=="\n\xa0\n"):
           menuList.append('-')
      else:
           menuList.append(after)
@@ -27,16 +27,15 @@ dinner = []
 for a in range(3):
      for b in range(6):
           if(a == 0):
-               breakfast.append(menuList[a*8 + b])
+               breakfast.append(re.sub('\n\n', '\n', menuList[a*8 + b]))
           elif(a==1):
-               lunch.append(menuList[a*8 + b])
+               lunch.append(re.sub('\n\n', '\n', menuList[a*8 + b]))
           elif(a==2):
-               dinner.append(menuList[a*8 + b])
+               dinner.append(re.sub('\n\n', '\n', menuList[a*8 + b]))
 
 print(breakfast)
 print(lunch)
 print(dinner)
-
 
 conn = pymysql.connect(host='localhost', user='root', password='12345', db='daily_menu', charset='utf8')
 try:
