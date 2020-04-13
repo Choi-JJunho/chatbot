@@ -52,7 +52,7 @@ public class MenuToJsonImpl implements MenuToJson {
             for(Object menulist : map.values()) {
                 desc += menulist;
             }
-            desc += "\n────────────\n";
+            desc += "────────────\n";
         }
         return desc;
     }
