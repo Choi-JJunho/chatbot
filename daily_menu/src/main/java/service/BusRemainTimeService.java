@@ -10,9 +10,8 @@ public class BusRemainTimeService {
     @Autowired
     BusTimeService busTimeService;
 
-    public String getBusTime(String Daesung[], String Shuttle[]) {
+    public String getBusTime(String Daesung[], String Shuttle[], LocalTime time) {
         boolean flag = false;
-        LocalTime time = LocalTime.now();
         String currentTime = time.toString("HH:mm:ss");
         String result = "";
         result += "[ 학교셔틀 ]\n";
@@ -38,13 +37,13 @@ public class BusRemainTimeService {
                 continue;
             } else {
                 result += busTimeService.getRemainTime(currentTime, bustime) +
-                        "남았습니다.\n";
+                        "남았습니다.";
                 flag = true;
                 break;
             }
         }
         if(!flag)
-            result += "운행정보가 없습니다\n";
+            result += "운행정보가 없습니다";
 
         return result;
     }

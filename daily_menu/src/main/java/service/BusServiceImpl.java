@@ -1,9 +1,13 @@
 package service;
 
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+
+import static java.time.DayOfWeek.*;
 
 @Service
 public class BusServiceImpl implements BusService {
@@ -16,6 +20,7 @@ public class BusServiceImpl implements BusService {
 
     @Autowired
     BusRemainTimeService busRemainTimeService;
+
     static String NonData[] = {"00:00"};
 
     static String atTerminal_DaeSung[] = {
@@ -46,28 +51,83 @@ public class BusServiceImpl implements BusService {
             "14:00"
     };
 
+    static String atKoreatech_sunday_shuttle[] = {
+            "17:00"
+    };
+
     static String atTerminal_saturday_shuttle[] = {
             "14:25", "18:45"
     };
 
-    public HashMap<String, Object> getKoreatech() {
+    static String atTerminal_sunday_shuttle[] = {
+            "17:30","21:15","21:30"
+    };
 
-        String result = busRemainTimeService.getBusTime(atKoreatech_DaeSung, atKoreatech_daily_shuttle);
+    static String atStation_toKoreatech_saturday_shuttle[] = {
+            "14:30", "18:50"
+    };
+
+    static String atStation_toKoreatech_sunday_shuttle[] = {
+            "17:35","21:20","21:35"
+    };
+
+
+    public HashMap<String, Object> getKoreatech() {
+        LocalTime time = LocalTime.now();
+        LocalDate date = LocalDate.now();
+        String result = "";
+
+        if(date.getDayOfWeek().equals(SATURDAY))
+            result = busRemainTimeService.getBusTime(atKoreatech_DaeSung, atKoreatech_saturday_shuttle, time);
+        else if (date.getDayOfWeek().equals(SUNDAY))
+            result = busRemainTimeService.getBusTime(atKoreatech_DaeSung, atKoreatech_sunday_shuttle, time);
+        else
+            result = busRemainTimeService.getBusTime(atKoreatech_DaeSung, atKoreatech_daily_shuttle, time);
         return simpleText.simpleText(result);
     }
 
     public HashMap<String, Object> getTerminal() {
-        String result = busRemainTimeService.getBusTime(atTerminal_DaeSung, atTerminal_daily_shuttle);
+        LocalTime time = LocalTime.now();
+        LocalDate date = LocalDate.now();
+        String result = "";
+
+        if(date.getDayOfWeek().equals(SATURDAY))
+            result = busRemainTimeService.getBusTime(atTerminal_DaeSung, atTerminal_saturday_shuttle, time);
+        else if (date.getDayOfWeek().equals(SUNDAY))
+            result = busRemainTimeService.getBusTime(atTerminal_DaeSung, atTerminal_sunday_shuttle, time);
+        else
+            result = busRemainTimeService.getBusTime(atTerminal_DaeSung, atTerminal_daily_shuttle, time);
+
         return simpleText.simpleText(result);
     }
 
     public HashMap<String, Object> getStationToKoreatech() {
-        String result = busRemainTimeService.getBusTime(NonData, atKoreatech_daily_shuttle);
+        LocalTime time = LocalTime.now();
+        LocalDate date = LocalDate.now();
+        String result = "";
+
+        if(date.getDayOfWeek().equals(SATURDAY))
+            result = busRemainTimeService.getBusTime(NonData, atStation_toKoreatech_saturday_shuttle, time);
+        else if (date.getDayOfWeek().equals(SUNDAY))
+            result = busRemainTimeService.getBusTime(NonData, atStation_toKoreatech_sunday_shuttle, time);
+        else
+            result = busRemainTimeService.getBusTime(NonData, atStation_toKoreatech_daily_shuttle, time);
+
         return simpleText.simpleText(result);
     }
 
     public HashMap<String, Object> getStationToTerminal() {
-        String result = busRemainTimeService.getBusTime(NonData, NonData);
+        LocalTime time = LocalTime.now();
+        LocalDate date = LocalDate.now();
+        String result = "";
+
+        if(date.getDayOfWeek().equals(SATURDAY))
+            result = busRemainTimeService.getBusTime(NonData, NonData, time);
+        else if (date.getDayOfWeek().equals(SUNDAY))
+            result = busRemainTimeService.getBusTime(NonData, NonData, time);
+        else
+            result = busRemainTimeService.getBusTime(NonData, NonData, time);
+
         return simpleText.simpleText(result);
     }
 }
