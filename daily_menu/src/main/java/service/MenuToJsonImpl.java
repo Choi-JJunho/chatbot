@@ -23,33 +23,35 @@ public class MenuToJsonImpl implements MenuToJson {
             String key = keys.next();
             switch (key) {
                 case "korean":
-                    desc += "[한식]\n";
+                    desc += "[한식]";
                     break;
 
                 case "special":
-                    desc += "[일품]\n";
+                    desc += "[일품]";
                     break;
 
                 case "onedish":
-                    desc += "[특식]\n";
+                    desc += "[특식]";
                     break;
 
                 case "western":
-                    desc += "[양식]\n";
+                    desc += "[양식]";
                     break;
 
                 case "faculty":
-                    desc += "[능수관]\n";
+                    desc += "[능수관]";
                     break;
 
                 case "subak":
-                    desc += "[수박여]\n";
+                    desc += "[수박여]";
                     break;
 
                 default:
                     break;
             }
-            desc += map.values().toString();
+            for(Object menulist : map.values()) {
+                desc += menulist;
+            }
             desc += "\n────────────\n";
         }
         return desc;
