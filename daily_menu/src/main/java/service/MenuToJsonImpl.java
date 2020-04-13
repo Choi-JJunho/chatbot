@@ -49,7 +49,7 @@ public class MenuToJsonImpl implements MenuToJson {
                 default:
                     break;
             }
-            desc += map.values();
+            desc += map.values().toString();
             desc += "\n────────────\n";
         }
         return desc;
