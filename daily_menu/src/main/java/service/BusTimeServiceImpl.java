@@ -46,10 +46,10 @@ public class BusTimeServiceImpl implements BusTimeService {
             }
             ++flag;
         }
+
         String result = Integer.toString(hour) + "시간 "
                 + Integer.toString(min) + "분 "
                 + Integer.toString(sec)+"초\n";
-        System.out.println(result);
         return result;
     }
 }
