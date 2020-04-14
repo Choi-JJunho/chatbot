@@ -1,5 +1,6 @@
 package service;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,7 @@ public class BusServiceImpl implements BusService {
 
 
     public HashMap<String, Object> getKoreatech() {
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now(DateTimeZone.forID("Asia/Seoul"));
         LocalDate date = LocalDate.now();
         String result = "";
 
@@ -87,7 +88,7 @@ public class BusServiceImpl implements BusService {
     }
 
     public HashMap<String, Object> getTerminal() {
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now(DateTimeZone.forID("Asia/Seoul"));
         LocalDate date = LocalDate.now();
         String result = "";
 
@@ -102,7 +103,7 @@ public class BusServiceImpl implements BusService {
     }
 
     public HashMap<String, Object> getStationToKoreatech() {
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now(DateTimeZone.forID("Asia/Seoul"));
         LocalDate date = LocalDate.now();
         String result = "";
 
@@ -117,7 +118,7 @@ public class BusServiceImpl implements BusService {
     }
 
     public HashMap<String, Object> getStationToTerminal() {
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.now(DateTimeZone.forID("Asia/Seoul"));
         LocalDate date = LocalDate.now();
         String result = "";
 
