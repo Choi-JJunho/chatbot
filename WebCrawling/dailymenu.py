@@ -1,13 +1,30 @@
 from urllib.request import urlopen
+from urllib.request import Request
 from bs4 import BeautifulSoup
+import requests
+import request
 import ssl
 import re
 import pymysql
 import datetime
+#
 
-context = ssl._create_unverified_context()
-URL = urlopen("https://coop.koreatech.ac.kr/dining/menu.php", context=context)
-bs = BeautifulSoup(URL, 'html.parser')
+
+# URL = urlopen("https://coop.koreatech.ac.kr/dining/menu.php", context=sslcontext)
+# bs = BeautifulSoup(URL.read(), 'html.parser')
+
+# headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
+# req = requests.get('https://coop.koreatech.ac.kr/dining/menu.php', headers=headers)
+# req.encoding = 'euc-kr'
+# html = req.text
+# bs = BeautifulSoup(html, 'html.parser')
+sslcontext = ssl._create_unverified_context()
+url = 'https://coop.koreatech.ac.kr/dining/menu.php'
+user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'
+request = Request(url, headers={'User-Agent': user_agent})
+response = urlopen(request, context=sslcontext)
+html = response.read()
+bs = BeautifulSoup(html, 'html.parser')
 
 name = re.compile('menu-list?.')
 menuList = []
@@ -23,6 +40,7 @@ for menulist in bs.find_all("td", {"class":name}):
 breakfast = []
 lunch = []
 dinner = []
+print(menuList)
 
 for a in range(3):
      for b in range(6):
@@ -37,7 +55,13 @@ print(breakfast)
 print(lunch)
 print(dinner)
 
-conn = pymysql.connect(host='localhost', user='root', password='12345', db='daily_menu', charset='utf8')
+conn = pymysql.connect(
+    host='menulist.cijah1y9hsc9.ap-northeast-2.rds.amazonaws.com',
+    port=3306,
+    user='admin',
+    password='12345678',
+    db='dailymenu',
+    charset='utf8')
 try:
     with conn.cursor() as curs:
         curs.execute('TRUNCATE TABLE breakfast;')

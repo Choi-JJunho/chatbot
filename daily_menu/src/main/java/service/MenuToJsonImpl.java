@@ -49,9 +49,7 @@ public class MenuToJsonImpl implements MenuToJson {
                 default:
                     break;
             }
-            for(Object menulist : map.values()) {
-                desc += menulist;
-            }
+            desc += map.get(key);
             desc += "────────────\n";
         }
         return desc;
