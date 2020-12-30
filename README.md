@@ -2,7 +2,8 @@
 ---
 서비스 링크
 ---
-https://pf.kakao.com/_xfxciPxb
+~https://pf.kakao.com/_xfxciPxb~
+현재 서비스 내림
 
 기능
 ---
